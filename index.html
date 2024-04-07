@@ -385,7 +385,7 @@
 
             <div class="contact-label">Book Through Call</div>
 
-            <a href="tel:+804001234567" class="body-1 contact-number hover-underline">7999969225</a>
+            <a href="tel:7999969225" class="body-1 contact-number hover-underline">7999969225</a>
 
             <a href="https://motimahalgroup.com/home/story" class="btn btn-primary">
               <span class="text text-1">Read More</span>
@@ -697,13 +697,16 @@
                   Booking request <a href="tel:7999969225" class="link">7999969225</a> or fill out the order form
               </p>
               <div class="input-wrapper">
-                  <input type="text" name="name" placeholder="Your Name" autocomplete="off" class="input-field">
-                  <input type="tel" name="phone" placeholder="Phone Number" autocomplete="off" class="input-field">
-              </div>
+                <input type="text" name="name" placeholder="Your Name" autocomplete="on" class="input-field" pattern="[A-Za-z ]+" title="Please enter only alphabetic characters">
+                <input type="tel" name="phone" placeholder="Phone Number" autocomplete="on" class="input-field" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+            </div>
+             <div class="email-wrapper">
+                    <input type="email" name="email_address" placeholder="Your Email" autocomplete="on" class="input-field" title="Please enter a valid email address">
+             </div>
               <div class="input-wrapper">
                   <div class="icon-wrapper">
                       <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
-                      <input type="number" name="person" class="input-field" id="person-input" min="1" placeholder="Enter number of persons">      
+                      <input type="number" name="person" class="input-field" id="person-input" min="1" max="100" placeholder="Enter number of persons">      
                       </select>
                   </div>
                   <div class="icon-wrapper">
@@ -892,7 +895,7 @@
           <form action="/submit-reservation" method="POST" class="input-wrapper">
             <div class="icon-wrapper">
                 <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
-                <input type="email" name="email_address" placeholder="Your email" autocomplete="off" class="input-field">
+                <input type="email" name="email_address" placeholder="Your email" autocomplete="on" class="input-field">
             </div>
             <button type="submit" class="btn btn-secondary">
                 <span class="text text-1">Subscribe</span>
