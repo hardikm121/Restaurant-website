@@ -9,7 +9,7 @@ const PORT = 3000;
 
 // MongoDB connection
 const MongoClient = mongodb.MongoClient;
-const url = 'mongodb+srv://chetan:Hardik126@cluster0.gwxnipf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const url = 'mongodb+srv://Hardik263:Hardik263@cluster0.gwxnipf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 const dbName = 'restaurant';
 const collectionName = 'reservation';
 
