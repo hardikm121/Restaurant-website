@@ -9,9 +9,9 @@ const PORT = 3000;
 
 // MongoDB connection
 const MongoClient = mongodb.MongoClient;
-const url = 'mongodb+srv://hardikmalviya288:hardikmalviya288@cluster0.gwxnipf.mongodb.net/';
+const url = 'mongodb+srv://chetan:chetan2023@cluster0.gwxnipf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 const dbName = 'restaurant';
-const collectionName = 'reservations';
+const collectionName = 'reservation';
 
 // Nodemailer setup
 const transporter = nodemailer.createTransport({
