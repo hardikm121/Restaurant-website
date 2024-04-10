@@ -33,12 +33,12 @@ app.get('/', (req, res) => {
 
 // thankyou page ke lia
 app.get('/thankyou', (req, res) => {
-    res.sendFile(path.join(__dirname, '\\assets\\html\\thank.html')); 
+    res.sendFile(path.join(__dirname, 'thank.html')); 
 });
 
 // newsletter page ke lia
 app.get('/thankyou-newsletter', (req, res) => {
-    res.sendFile(path.join(__dirname, '\\assets\\html\\newsletter.html')); 
+    res.sendFile(path.join(__dirname, 'newsletter.html')); 
 });
 
 // Reservation submission ko handle karna
