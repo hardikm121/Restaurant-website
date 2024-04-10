@@ -1,39 +1,47 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongodb = require('mongodb'); //database ke lia 
-const path = require('path');
-const nodemailer = require('nodemailer'); // email ke lia 
+const express = require('express'); 
+const bodyParser = require('body-parser'); 
+const mongodb = require('mongodb'); 
+const path = require('path'); 
+const nodemailer = require('nodemailer');
 
-const app = express();
+const app = express(); 
 const PORT = 3000;
 
-// MongoDB connection
-const MongoClient = mongodb.MongoClient;
-const url = 'mongodb+srv://Hardik263:Hardik263@cluster0.gwxnipf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
-const dbName = 'restaurant';
-const collectionName = 'reservation';
+// MongoDB connection online atlas pe
+const MongoClient = mongodb.MongoClient; 
+const url = 'mongodb+srv://Hardik263:Hardik263@cluster0.gwxnipf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'; // MongoDB Atlas ka connection URL
+const dbName = 'restaurant'; 
+const collectionName = 'reservation'; 
 
-// Nodemailer setup
+// Nodemailer ka setup
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'moviefinder109@gmail.com',
-        pass: 'qhvkhwrplsyoeogk'
+        pass: 'qhvkhwrplsyoeogk' 
     }
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-// Serve static assets (css, images, etc.)
+app.use(bodyParser.json()); 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
-// Serve main HTML page
+// index page ke lia
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.html')); 
 });
 
-// Handle reservation submission
+// thankyou page ke lia
+app.get('/thankyou', (req, res) => {
+    res.sendFile(path.join(__dirname, '\\assets\\html\\thank.html')); 
+});
+
+// newsletter page ke lia
+app.get('/thankyou-newsletter', (req, res) => {
+    res.sendFile(path.join(__dirname, '\\assets\\html\\newsletter.html')); 
+});
+
+// Reservation submission ko handle karna
 app.post('/submit-reservation', async (req, res) => {
     try {
         const client = await MongoClient.connect(url);
@@ -43,36 +51,36 @@ app.post('/submit-reservation', async (req, res) => {
         const reservationData = req.body;
         const result = await collection.insertOne(reservationData);
 
-        // Send email notification
-        await sendEmailNotification(reservationData);
+        // Reservation ke liye email notification bheja gaya hai
+        await sendReservationEmailNotification(reservationData);
 
-        client.close();
-        // Redirect to thank you page
-        res.redirect('/thankyou');
+        client.close(); 
+        res.redirect('/thankyou'); 
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).json({ message: 'An error occurred while submitting reservation' });
+        res.status(500).json({ message: 'An error occurred while submitting reservation' }); 
     }
 });
 
-// Serve thank you page
-app.get('/thankyou', (req, res) => {
-    res.sendFile(path.join(__dirname, 'thank.html'));
-});
-
-// Start the server
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
-
-// Function to send email notification
-async function sendEmailNotification(reservationData) {
+// Newsletter subscription ko handle karna
+app.post('/subscribe-newsletter', async (req, res) => {
     try {
-        // Email content
+        const { email_address } = req.body; 
+        await sendNewsletterEmailNotification(email_address);
+        res.redirect('/thankyou-newsletter'); 
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'An error occurred while subscribing to newsletter' }); 
+    }
+});
+
+// Reservation ke liye email notification bhejne ka function
+async function sendReservationEmailNotification(reservationData) {
+    try {
         const mailOptions = {
-            from: 'moviefinder109@gmail.com', // Sender address
-            to: reservationData.email_address, // reservation email (reciver ke lia)
-            subject: 'Reservation Confirmation', // Email subject
+            from: 'moviefinder109@gmail.com',
+            to: reservationData.email_address,
+            subject: 'Reservation Confirmation',
             text: `Hello ${reservationData.name},
 
             Thank you for making a reservation with us. We are delighted to confirm your booking. Below are the details of your reservation:
@@ -92,12 +100,41 @@ async function sendEmailNotification(reservationData) {
             Best Regards,
             Moti Mahal Team
             Hardik Malviya`
-                    };
+        };
 
-        // Send email
         await transporter.sendMail(mailOptions);
-        console.log('Email notification sent successfully');
+        console.log('Reservation email notification sent successfully'); 
     } catch (error) {
-        console.error('Error sending email notification:', error);
+        console.error('Error sending reservation email notification:', error); 
     }
 }
+
+// Newsletter subscription ke liye email notification bhejne ka function
+async function sendNewsletterEmailNotification(email_address) {
+    try {
+        const mailOptions = {
+            from: 'moviefinder109@gmail.com',
+            to: email_address,
+            subject: 'Newsletter Subscription Confirmation',
+            text: `Hello,
+
+            Thank you for subscribing to our newsletter! You will now receive updates, promotions, and special offers directly to your inbox.
+
+            We appreciate your interest in our restaurant and look forward to sharing exciting news with you.
+
+            Best Regards,
+            Moti Mahal Team
+            Hardik Malviya`
+        };
+
+        await transporter.sendMail(mailOptions); 
+        console.log('Newsletter subscription email notification sent successfully'); 
+    } catch (error) {
+        console.error('Error sending newsletter subscription email notification:', error); 
+    }
+}
+
+// Server ko start kiya gaya hai
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`); 
+});

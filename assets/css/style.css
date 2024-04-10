@@ -572,11 +572,6 @@ body.nav-active { overflow: hidden; }
   animation: menuBtn 400ms ease-in-out alternate infinite;
 }
 
-@keyframes menuBtn {
-  0% { transform: scaleX(1); }
-  100% { transform: scaleX(0.5); }
-}
-
 .nav-open-btn .line-2 { animation-delay: 150ms; }
 
 .nav-open-btn .line-3 { animation-delay: 300ms; }
@@ -693,6 +688,7 @@ body.nav-active { overflow: hidden; }
   pointer-events: all;
 }
 
+/*Hero*/
 
 .hero .slider-btn { display: none; }
 
