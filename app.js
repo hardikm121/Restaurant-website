@@ -17,8 +17,8 @@ const collectionName = 'reservation';
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'moviefinder109@gmail.com',
-        pass: 'qhvkhwrplsyoeogk' 
+        user: 'motimahal116@gmail.com',
+        pass: 'cvmwpoiifdalbzqw' 
     }
 });
 
@@ -78,7 +78,7 @@ app.post('/subscribe-newsletter', async (req, res) => {
 async function sendReservationEmailNotification(reservationData) {
     try {
         const mailOptions = {
-            from: 'moviefinder109@gmail.com',
+            from: 'motimahal116@gmail.com',
             to: reservationData.email_address,
             subject: 'Reservation Confirmation',
             text: `Hello ${reservationData.name},
@@ -113,7 +113,7 @@ async function sendReservationEmailNotification(reservationData) {
 async function sendNewsletterEmailNotification(email_address) {
     try {
         const mailOptions = {
-            from: 'moviefinder109@gmail.com',
+            from: 'motimahal116@gmail.com',
             to: email_address,
             subject: 'Newsletter Subscription Confirmation',
             text: `Hello,

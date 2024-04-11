@@ -693,8 +693,8 @@
                   Booking request <a href="tel:7999969225" class="link">7999969225</a> or fill out the order form
               </p>
               <div class="input-wrapper">
-                <input type="text" name="name" placeholder="Your Name" autocomplete="on" class="input-field" pattern="[A-Za-z ]+" title="Please enter only alphabetic characters">
-                <input type="tel" name="phone" placeholder="Phone Number" autocomplete="on" class="input-field" oninput="this.value = this.value.replace(/[^0-9]/g, ''); limitInput(this, 10);">
+                <input type="text" name="name" id="nameInput" placeholder="Your Name" autocomplete="on" class="input-field">
+                <input type="tel" name="phone" placeholder="Phone Number" autocomplete="on" class="input-field" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 10);">
               </div>
              <div class="email-wrapper">
                     <input type="email" name="email_address" placeholder="Your Email" autocomplete="on" class="input-field" title="Please enter a valid email address">

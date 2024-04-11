@@ -234,3 +234,11 @@ window.addEventListener("mousemove", function (event) {
     parallaxItems[i].style.transform = `translate3d(${x}px, ${y}px, 0px)`;
   }
 });
+
+document.getElementById("nameInput").addEventListener("input", function() {
+  var input = this.value.trim();
+  var isValid = /^[A-Za-z\s]+$/.test(input);
+  if (!isValid) {
+      this.value = input.replace(/[^A-Za-z\s]+/g, '');
+  }
+});
