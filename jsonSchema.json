@@ -1,0 +1,13 @@
+{
+    "bsonType": "object",
+    "required": ["name", "phone", "person", "reservationDate", "time"],
+    "properties": {
+      "name": { "bsonType": "string" },
+      "phone": { "bsonType": "string" },
+      "person": { "bsonType": "int" },
+      "reservationDate": { "bsonType": "date" },
+      "time": { "bsonType": "string" },
+      "message": { "bsonType": "string" }
+    }
+  }
+  
